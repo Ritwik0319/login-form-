@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -8px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <input type="text" id="username" placeholder="Enter user name">
+        <input type="text" id="mob" placeholder="Enter mobile number">
+        <input type="text" id="password" placeholder="Enter password">
+        <input type="text" id="conf_password" placeholder="Confirm password">
+        <p id="errorMsg" class="error"></p>
+        <button onclick="handleregister()">Register</button>
+    </div>
+
+    <script>
+        //function for validating the registred user password with confirm password and storing the data in localstorage
+        let handleregister = () => {
+            let username = document.getElementById("username").value
+            let usermob = document.getElementById("mob").value
+            let password = document.getElementById("password").value
+            let conf_password = document.getElementById("conf_password").value
+            // console.log(username, usermob, password, conf_password);
+
+            //storing the registred user details in obj:details
+
+            let details = {
+                name: username,
+                pass: password,
+                conf_pass: conf_password
+            }
+
+
+            //getting the storesd values from local storage if any or else creates a new array and pushing the each registred user details in to the array
+            users = JSON.parse(localStorage.getItem("users_list")) || []
+            users.push(details)
+
+
+
+            //validating the registred user password with confirm password
+            if (password === conf_password) {
+                //if pass and conf_pass is matched, then storing the registred user details in localstorage by converting the obj into string using JSON.stringify
+                localStorage.setItem("users_list", JSON.stringify(users))
+                alert("sucessfully registered")
+                // console.log(users);
+
+                window.open("http://127.0.0.1:5500/day20june/login.html", "_self")
+            }
+            else {
+                alert("please check password & confirm password")
+            }
+
+        }
+    </script>
+</body>
+
+</html>
