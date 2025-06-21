@@ -85,19 +85,15 @@
             // console.log(username, usermob, password, conf_password);
 
             //storing the registred user details in obj:details
-
             let details = {
                 name: username,
                 pass: password,
                 conf_pass: conf_password
             }
 
-
             //getting the storesd values from local storage if any or else creates a new array and pushing the each registred user details in to the array
             users = JSON.parse(localStorage.getItem("users_list")) || []
             users.push(details)
-
-
 
             //validating the registred user password with confirm password
             if (password === conf_password) {
@@ -111,7 +107,6 @@
             else {
                 alert("please check password & confirm password")
             }
-
         }
     </script>
 </body>
